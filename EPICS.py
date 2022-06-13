@@ -2,15 +2,6 @@ import numpy as np
 from scipy.linalg import solve as slv
 from copy import deepcopy
 
-#Number of species
-
-#below number of species from Gould et al (as referenced by Ansari et al)
-n = 5
-
-#below number of species in study by Ansari et al
-#n=8
-
-
 #abundance in monoculture
 
 #below abundances from Gould et al (as referenced by Ansari et al)
@@ -18,6 +9,9 @@ abundance_in_monoc = [177827.941003893, 422668.614265604, 143301.257023696, 2371
 
 #below abundances from Ansari et al
 #abundance_in_monoc = [2884030259.24548, 41686.9890738402, 1258925.78380719, 436515.384984744, 8709663.37151069, 199526.324505624, 346737.031168192, 2137962.73530952]
+
+#Number of species is set based on number of monocultures
+n = len(abundance_in_monoc)
 
 
 #abundances in leave-one-out cultures
