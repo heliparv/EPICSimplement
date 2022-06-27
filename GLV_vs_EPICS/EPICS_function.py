@@ -1,5 +1,6 @@
 import numpy as np
 from scipy.linalg import solve as slv
+from copy import deepcopy
 
 #Function of EPICS
 #Takes number of species, monoculture abundances and abundances in leave-one-out cultures as input
@@ -30,4 +31,10 @@ def epics(monoc, loo):
     #calculates prediction of abundances in n-member community by solving Ax=b where A is effective pairwise interactions and b set to -1
     abundance_n_member_community = slv(interactions_matrix, -1*np.ones((n,1)))
 
-    return (interactions_matrix, abundance_n_member_community)
+    #normalizes interaction matrix by self-interactions like done in EPICS paper
+    normalized_interactions_matrix = deepcopy(interactions_matrix)
+    for i in range(0, n):
+        for j in range(0, n):
+            normalized_interactions_matrix[i][j] = normalized_interactions_matrix[i][j]/interactions_matrix[j][j]
+
+    return (interactions_matrix, normalized_interactions_matrix, abundance_n_member_community)
